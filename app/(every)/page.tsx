@@ -1,6 +1,7 @@
 'use client';
 
 import styled from "styled-components";
+import Link from 'next/link'; // ✅ 추가
 
 const popularPostList = [
   { id: 1, date: "2025-05-16", title: "점심 뭐 먹지" },
@@ -28,11 +29,15 @@ export default function Home() {
           <PopularTitle>🖤 popular</PopularTitle>
           <Table>
             {popularPostList.map((post) => (
-              <Row key={post.id}>
-                <Title>{post.title}</Title>
-                <Date>{post.date}</Date>
-              </Row>
-            ))}
+  <Row key={post.id}>
+    <Link href={`/post/${post.id}`}>
+  <Title>{post.title}</Title>
+</Link>
+
+
+    <Date>{post.date}</Date>
+  </Row>
+))}
           </Table>
         </LeftPanel>
         <RightPanel>
@@ -136,9 +141,18 @@ const Row = styled.div`
   padding: 8px 0;
 `;
 
-const Title = styled.div`
+const Title = styled.a`
+  all: unset;
   font-size: 14px;
+  color: black;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
+
+
 
 const Date = styled.div`
   font-size: 14px;
